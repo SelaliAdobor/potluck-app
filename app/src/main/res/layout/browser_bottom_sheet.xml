@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/browser_bottom_sheet_height"
 
     android:orientation="vertical"
 
@@ -12,7 +12,7 @@
     android:background="@color/bottom_sheet_background"
 
     app:behavior_hideable="false"
-    app:behavior_peekHeight="@dimen/max_dp_value"
+    app:behavior_peekHeight="@dimen/browser_bottom_sheet_height"
     android:outlineProvider="bounds"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
@@ -31,9 +31,7 @@
     <ViewFlipper
         android:id="@+id/browser_sheet_location_info_flipper"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginBottom="24dp">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/browser_sheet_location_info_textView"
             android:layout_width="wrap_content"

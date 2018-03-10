@@ -2,4 +2,6 @@
 <resources>
     <dimen name="activity_margin">10dp</dimen>
     <dimen name="max_dp_value">1000dp</dimen>
+    <dimen name="browser_bottom_sheet_height">90dp</dimen>
+    <dimen name="map_padding_size">20dp</dimen>
 </resources>

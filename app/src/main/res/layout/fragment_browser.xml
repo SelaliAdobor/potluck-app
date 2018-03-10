@@ -23,7 +23,11 @@
 
     <include
         android:id="@+id/browser_content_view"
-        layout="@layout/browser_content_view" />
+        layout="@layout/browser_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/abc_action_bar_default_height_material"
+        android:layout_marginBottom="@dimen/browser_bottom_sheet_height"/>
 
 
     <com.potluck.util.ShadowView
