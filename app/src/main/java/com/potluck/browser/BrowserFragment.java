@@ -1,22 +1,47 @@
 package com.potluck.browser;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.jakewharton.rxrelay2.BehaviorRelay;
 import com.potluck.R;
+import com.potluck.api.Issues;
+import com.potluck.api.models.Issue;
+import com.potluck.api.models.IssueStatus;
 import com.potluck.util.StoredFragment;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.support.AndroidSupportInjection;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import timber.log.Timber;
+
+import static java9.util.stream.StreamSupport.stream;
 
 
 public class BrowserFragment extends StoredFragment {
+    @Inject
+    Retrofit retrofit;
     public static final String MAP_FRAGMENT_TAG = "MapFragment";
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
 
     private Unbinder unbinder;
 

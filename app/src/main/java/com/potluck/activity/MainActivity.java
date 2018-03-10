@@ -1,22 +1,41 @@
-package com.potluck;
+package com.potluck.activity;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
+import com.potluck.R;
 import com.potluck.browser.BrowserFragment;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 import java9.util.function.Supplier;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentInjector;
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentInjector;
+    }
+
     public static String BROWSER_FRAGMENT = "BrowserFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         if (savedInstanceState == null) {
             goToBrowser();
