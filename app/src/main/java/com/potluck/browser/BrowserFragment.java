@@ -6,13 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.potluck.R;
 import com.potluck.util.StoredFragment;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 public class BrowserFragment extends StoredFragment {
+    public static final String MAP_FRAGMENT_TAG = "MapFragment";
+
+    private Unbinder unbinder;
+
     public BrowserFragment() {
     }
 
@@ -23,14 +30,43 @@ public class BrowserFragment extends StoredFragment {
     }
 
     @Override
+    public void onDestroyView() {
+        unbinder.unbind();
+        super.onDestroyView();
+    }
+
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public void onMapReady(GoogleMap map){
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupMap();
+    }
+
+    private void setupMap() {
+        SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag("MapFragment");
+        if(fragment == null){
+            fragment = SupportMapFragment.newInstance();
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.browser_map_container, fragment, MAP_FRAGMENT_TAG)
+                    .commit();
+        }
+
+        fragment.getMapAsync(this::onMapReady);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflatedView = inflater.inflate(R.layout.fragment_browser, container, false);
-        ButterKnife.bind(inflatedView);
+        unbinder = ButterKnife.bind(this, inflatedView);
         return inflatedView;
     }
 

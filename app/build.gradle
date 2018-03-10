@@ -1,7 +1,7 @@
 apply plugin: "com.android.application"
 
 repositories {
-    maven {url "https://clojars.org/repo/"}
+    maven { url "https://clojars.org/repo/" }
 }
 
 android {
@@ -68,4 +68,6 @@ dependencies {
 
     implementation "frankiesardo:icepick:3.2.0"
     annotationProcessor "frankiesardo:icepick-processor:3.2.0"
+
+    implementation "com.google.android.gms:play-services-maps:11.8.0"
 }
