@@ -16,4 +16,13 @@ public interface Issues {
                                             @Query("lat")Double latitude,
                                             @Query("lng")Double longitude,
                                             @Query("search")String searchTerms);
+    @GET("issues")
+    Single<IssueSearchResults> searchIssues(@Query("page") Integer page,
+                                            @Query("per_page") Integer issuesPerPage,
+                                            @Query("status")IssueStatus status,
+                                            @Query("min_lat")Double minLatitude,
+                                            @Query("min_lng")Double minLongitude,
+                                            @Query("max_lat")Double maxLatitude,
+                                            @Query("max_lng")Double maxLongitude,
+                                            @Query("search")String searchTerms);
 }

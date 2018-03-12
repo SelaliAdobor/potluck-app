@@ -6,12 +6,18 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import io.reactivex.annotations.Nullable;
+
 @AutoValue
 public abstract class Pagination {
     @SerializedName("next_page")
     public abstract int nextPageNumber();
 
+    @SerializedName("entries")
+    public abstract int entries();
+
     @SerializedName("next_page_url")
+    @Nullable
     public abstract String nextPageUrl();
 
     @SerializedName("page")
